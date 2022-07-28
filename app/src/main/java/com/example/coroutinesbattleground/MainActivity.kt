@@ -8,11 +8,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.coroutinesbattleground.ui.screens.Home
-import com.example.coroutinesbattleground.ui.screens.Option1
+import com.example.coroutinesbattleground.ui.screens.LightweightThreadsView
 
 sealed class Routes(val route: String) {
     object Home : Routes("Coroutines Battleground")
-    object Option : Routes("Option 1")
+    object LightweightThreads : Routes("Lightweight threads")
 }
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
         val navController = rememberNavController()
         NavHost(navController = navController, startDestination = Routes.Home.route) {
             composable(Routes.Home.route) { Home(navController) }
-            composable(Routes.Option.route) { Option1(navController) }
+            composable(Routes.LightweightThreads.route) { LightweightThreadsView(navController) }
         }
     }
 
