@@ -16,8 +16,11 @@ fun Home(navController: NavController) =
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(onClick = { navController.navigate(Routes.Option.route) }) {
-                Text(text = "First Option")
+            Button(onClick = { navController.navigate(Routes.LightweightThreads.route) }) {
+                Text(text = "Coroutines are Lightweight Threads")
+            }
+            Button(onClick = { /* navController.navigate(Routes.Option.route) */ }) {
+                Text(text = "Switching between threads (withContext)")
             }
         }
     }
