@@ -19,7 +19,7 @@ fun Home(navController: NavController) =
             Button(onClick = { navController.navigate(Routes.LightweightThreads.route) }) {
                 Text(text = "Coroutines are Lightweight Threads")
             }
-            Button(onClick = { /* navController.navigate(Routes.Option.route) */ }) {
+            Button(onClick = { navController.navigate(Routes.SwitchingBetweenThreads.route) }) {
                 Text(text = "Switching between threads (withContext)")
             }
         }
