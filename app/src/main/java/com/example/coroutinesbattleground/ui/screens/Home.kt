@@ -22,5 +22,8 @@ fun Home(navController: NavController) =
             Button(onClick = { navController.navigate(Routes.SwitchingBetweenThreads.route) }) {
                 Text(text = "Switching between threads (withContext)")
             }
+            Button(onClick = { navController.navigate(Routes.Job.route) }) {
+                Text(text = "Handling coroutine with Job")
+            }
         }
     }

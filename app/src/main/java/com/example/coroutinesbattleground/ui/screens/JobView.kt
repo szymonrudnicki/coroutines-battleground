@@ -12,17 +12,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.coroutinesbattleground.Routes
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-
-private val threadName get() = Thread.currentThread().name
+import kotlinx.coroutines.*
 
 @Composable
-fun SwitchingBetweenThreadsView(
+fun JobView(
     navController: NavController,
-) = BaseOptionScreen(navController = navController, title = Routes.SwitchingBetweenThreads.route) {
+) = BaseOptionScreen(navController = navController, title = Routes.Job.route) {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -44,27 +39,30 @@ fun SwitchingBetweenThreadsView(
             )
         }
 
-        Text("Coroutines can jump to different threads", fontWeight = FontWeight.Bold)
+        Text("Job can be used to cancel the coroutine", fontWeight = FontWeight.Bold)
+
+        var job : Job? = null
 
         Button(onClick = {
-            coroutineScope.launch {
-                withContext(Dispatchers.Default) {
-                    coroutinesTextValue += "I'm on '${threadName}' thread (default)\n"
-                }
-                delay(1500L)
-                withContext(Dispatchers.Main) {
-                    coroutinesTextValue += "Entering '${threadName}' thread\n"
-                    delay(1500L)
-                    withContext(Dispatchers.IO) {
-                        coroutinesTextValue += "I'm on '${threadName}' thread (IO) \n"
-                        delay(1500L)
+            job = coroutineScope.launch(Dispatchers.Default) {
+                var nextPrintTime = System.currentTimeMillis()
+                while(isActive) {
+                    yield()
+                    if (System.currentTimeMillis() >= nextPrintTime) {
+                        coroutinesTextValue += "Working...\n"
+                        nextPrintTime += 1000L
                     }
-                    coroutinesTextValue += "I'm back on '${threadName}' thread\n"
                 }
-                delay(1500L)
+                coroutinesTextValue += "Not active anymore.\n"
             }
         }) {
-            Text("Run")
+            Text("Launch")
+        }
+
+        Button(onClick = {
+            job?.cancel()
+        }) {
+            Text("Cancel")
         }
     }
 }
