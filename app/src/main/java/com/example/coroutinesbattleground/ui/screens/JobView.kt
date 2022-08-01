@@ -13,12 +13,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.coroutinesbattleground.Routes
-import com.example.coroutinesbattleground.ui.MainViewModel
+import com.example.coroutinesbattleground.ui.JobViewModel
 
 @Composable
 fun JobView(
     navController: NavController,
-    viewModel: MainViewModel = viewModel()
+    viewModel: JobViewModel = viewModel()
 ) = BaseOptionScreen(navController = navController, title = Routes.Job.route) {
     Column(
         verticalArrangement = Arrangement.Top,

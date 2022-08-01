@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 
-class MainViewModel : ViewModel() {
+class JobViewModel : ViewModel() {
 
     private var job: Job? = null
 
